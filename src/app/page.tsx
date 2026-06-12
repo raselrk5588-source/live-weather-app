@@ -19,7 +19,7 @@ type Tab = 'weather' | 'agri' | 'prayer';
 export default function Home() {
   const [activeTab, setActiveTab] = useState<Tab>('weather');
   const [activeSubScreen, setActiveSubScreen] = useState<string | null>(null);
-  const { theme, setTheme, location, setLocation, setCityName } = useAppContext();
+  const { theme, setTheme, location, setLocation } = useAppContext();
   const [locating, setLocating] = useState(false);
 
   const toggleTheme = () => {
@@ -53,7 +53,6 @@ export default function Home() {
         setLocating(false);
       }
     );
-    setCityName("ঢাকা");
   };
 
   const renderSubScreen = () => {
