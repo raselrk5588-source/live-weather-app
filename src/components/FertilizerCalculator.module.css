@@ -1,0 +1,107 @@
+.calculatorContainer {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  border-radius: 16px;
+}
+
+.calcTitle {
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  margin: 0 0 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.formGroup {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.select, .input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.select:focus, .input:focus {
+  border-color: var(--accent-green);
+}
+
+.select option {
+  background: #1e293b;
+  color: #fff;
+}
+
+.calcBtn {
+  width: 100%;
+  padding: 0.85rem;
+  background: var(--accent-green);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: all 0.2s;
+}
+
+.calcBtn:hover {
+  background: #16a34a;
+}
+
+.resultBox {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: rgba(34, 197, 94, 0.1);
+  border-left: 4px solid var(--accent-green);
+  border-radius: 0 12px 12px 0;
+  animation: fadeIn 0.3s ease;
+}
+
+.resultTitle {
+  font-size: 1rem;
+  color: var(--accent-green);
+  margin: 0 0 0.75rem 0;
+  font-weight: 600;
+}
+
+.resultGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.resultItem {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 0.75rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.fertName {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.fertAmount {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
