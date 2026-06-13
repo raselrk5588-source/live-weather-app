@@ -7,6 +7,7 @@ import { useAppContext } from '../context/AppContext';
 import { speakBengali } from '../utils/speak';
 import { toBengaliNumber } from '../utils/number';
 import FertilizerCalculator from './FertilizerCalculator';
+import DiseaseScanner from './DiseaseScanner';
 
 interface AgriData {
   current: {
@@ -229,6 +230,10 @@ export default function AgriDashboard() {
 
       
       <FertilizerCalculator />
+      <div style={{ marginTop: '2rem', padding: '0 0.5rem' }}>
+        <h3 style={{ marginBottom: '1rem', color: 'var(--text-primary)', fontSize: '1.1rem' }}>ফসল রোগ নির্ণয় (AI)</h3>
+        <DiseaseScanner />
+      </div>
     </div>
   );
 }

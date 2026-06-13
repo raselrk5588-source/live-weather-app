@@ -53,6 +53,10 @@ html.dark {
   padding: 0;
 }
 
+html {
+  font-size: 14px; /* Reduces base size so all rem units become smaller */
+}
+
 body {
   font-family: var(--font-body);
   background: var(--bg-gradient-start);

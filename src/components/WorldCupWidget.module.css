@@ -1,0 +1,285 @@
+.widgetContainer {
+  /* Modern Glassmorphic Dark Container */
+  background: linear-gradient(145deg, rgba(30, 32, 40, 0.9) 0%, rgba(18, 20, 26, 0.95) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.header {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.02), transparent);
+}
+
+.headerTitle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logoIcon {
+  font-size: 28px;
+  filter: drop-shadow(0 0 8px rgba(66, 153, 225, 0.4));
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+  100% { transform: translateY(0px); }
+}
+
+.headerTitle h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  background: linear-gradient(90deg, #ffffff, #a0aec0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 0.5px;
+}
+
+.headerTitle p {
+  margin: 2px 0 0;
+  font-size: 11px;
+  color: #718096;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.mainTabs {
+  display: flex;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  overflow-x: auto;
+  scrollbar-width: none;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.mainTabs::-webkit-scrollbar {
+  display: none;
+}
+
+.mainTab {
+  flex: 1;
+  padding: 12px 14px;
+  background: none;
+  border: none;
+  font-size: 13px;
+  color: #718096;
+  cursor: pointer;
+  position: relative;
+  white-space: nowrap;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.mainTab:hover {
+  color: #cbd5e0;
+}
+
+.activeMainTab {
+  color: #63b3ed;
+  font-weight: 700;
+}
+
+.activeMainTab::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  right: 10%;
+  height: 3px;
+  background-color: #63b3ed;
+  border-radius: 3px 3px 0 0;
+  box-shadow: 0 -2px 8px rgba(99, 179, 237, 0.5);
+}
+
+.contentArea {
+  padding: 12px 14px;
+  min-height: 250px;
+  background: radial-gradient(circle at top right, rgba(49, 130, 206, 0.05), transparent 60%);
+}
+
+.matchesSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.dateSelector {
+  display: flex;
+  gap: 10px;
+  padding-bottom: 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.dateSelector::-webkit-scrollbar {
+  display: none;
+}
+
+.dateBtn {
+  padding: 6px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  color: #a0aec0;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+}
+
+.dateBtn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #e2e8f0;
+}
+
+.activeDateBtn {
+  background: linear-gradient(135deg, #3182ce, #2b6cb0);
+  color: #ffffff;
+  border-color: transparent;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(49, 130, 206, 0.3);
+}
+
+.matchList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.googleMatchCard {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.googleMatchCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, #4299e1, #3182ce);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.googleMatchCard:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.googleMatchCard:hover::before {
+  opacity: 1;
+}
+
+.matchGroupInfo {
+  font-size: 10px;
+  color: #a0aec0;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.matchCardBody {
+  display: flex;
+  align-items: stretch;
+}
+
+.teamsSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-right: 12px;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.teamRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.teamNameWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.flag {
+  font-size: 16px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.teamName {
+  font-size: 13px;
+  color: #f7fafc;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.teamScore {
+  font-size: 14px;
+  font-weight: 700;
+  color: #f7fafc;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.matchStatusSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 12px;
+  min-width: 60px;
+}
+
+.statusText {
+  font-size: 12px;
+  color: #63b3ed;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.placeholderState {
+  padding: 30px;
+  text-align: center;
+  color: #718096;
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 120px;
+  background: rgba(0,0,0,0.1);
+  border-radius: 12px;
+  border: 1px dashed rgba(255,255,255,0.1);
+}

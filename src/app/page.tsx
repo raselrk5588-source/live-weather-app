@@ -9,9 +9,12 @@ import DiseaseScanner from "../components/DiseaseScanner";
 import TaskReminder from "../components/TaskReminder";
 import HelplineWidget from "../components/HelplineWidget";
 import BengaliCalendarWidget from "../components/BengaliCalendarWidget";
-import AgriNewsWidget from "../components/AgriNewsWidget";
+import NewsWidget from "../components/NewsWidget";
 import VoiceAssistant from "../components/VoiceAssistant";
-import { Cloud, Sprout, Moon, MapPin, Moon as MoonIcon, Sun, PhoneCall, Camera, CalendarCheck, ArrowLeft, CalendarDays } from "lucide-react";
+import GroceryListWidget from "../components/GroceryListWidget";
+import DailyQuotesWidget from "../components/DailyQuotesWidget";
+import WorldCupWidget from "../components/WorldCupWidget";
+import { Cloud, Sprout, Moon, MapPin, Moon as MoonIcon, Sun, PhoneCall, Camera, CalendarCheck, ArrowLeft, CalendarDays, ShoppingCart } from "lucide-react";
 import { useAppContext } from "../context/AppContext";
 
 type Tab = 'weather' | 'agri' | 'prayer';
@@ -70,6 +73,7 @@ export default function Home() {
             {activeSubScreen === 'calendar' && 'বাংলা পঞ্জিকা'}
             {activeSubScreen === 'agri' && 'কৃষি ড্যাশবোর্ড'}
             {activeSubScreen === 'prayer' && 'নামাজের সময়সূচি'}
+            {activeSubScreen === 'grocery' && 'বাজারের তালিকা'}
           </h2>
           <div style={{width: 40}}></div>
         </div>
@@ -80,6 +84,7 @@ export default function Home() {
           {activeSubScreen === 'calendar' && <BengaliCalendarWidget />}
           {activeSubScreen === 'agri' && <AgriDashboard />}
           {activeSubScreen === 'prayer' && <PrayerTimes />}
+          {activeSubScreen === 'grocery' && <GroceryListWidget />}
         </div>
       </div>
     );
@@ -127,10 +132,6 @@ export default function Home() {
                 <PhoneCall size={28} color="#ef4444" />
                 <span>হেল্পলাইন</span>
               </div>
-              <div className={`${styles.quickCard} glass-panel`} onClick={() => setActiveSubScreen('scanner')}>
-                <Camera size={28} color="#a855f7" />
-                <span>রোগ নির্ণয়</span>
-              </div>
               <div className={`${styles.quickCard} glass-panel`} onClick={() => setActiveSubScreen('reminder')}>
                 <CalendarCheck size={28} color="#10b981" />
                 <span>রিমাইন্ডার</span>
@@ -139,13 +140,18 @@ export default function Home() {
                 <CalendarDays size={28} color="#eab308" />
                 <span>পঞ্জিকা</span>
               </div>
+              <div className={`${styles.quickCard} glass-panel`} onClick={() => setActiveSubScreen('grocery')}>
+                <ShoppingCart size={28} color="#f97316" />
+                <span>বাজার</span>
+              </div>
             </div>
-            <AgriNewsWidget />
+            <DailyQuotesWidget />
+            <WorldCupWidget />
+            <NewsWidget />
           </div>
         </div>
       </div>
       
-      <VoiceAssistant />
     </main>
   );
 }
