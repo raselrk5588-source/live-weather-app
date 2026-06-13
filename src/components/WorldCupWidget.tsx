@@ -98,8 +98,8 @@ export default function WorldCupWidget() {
         <div className={styles.headerTitle}>
           <span className={styles.logoIcon}>⚽</span>
           <div>
-            <h2>World Cup 2026</h2>
-            <p>Men's tournament</p>
+            <h2>বিশ্বকাপ ২০২৬</h2>
+            <p>পুরুষদের টুর্নামেন্ট</p>
           </div>
         </div>
       </div>
@@ -109,15 +109,15 @@ export default function WorldCupWidget() {
         <button 
           className={`${styles.mainTab} ${activeTab === 'matches' ? styles.activeMainTab : ''}`}
           onClick={() => setActiveTab('matches')}
-        >Matches</button>
+        >ম্যাচ</button>
         <button 
           className={`${styles.mainTab} ${activeTab === 'news' ? styles.activeMainTab : ''}`}
           onClick={() => setActiveTab('news')}
-        >News</button>
+        >খবর</button>
         <button 
           className={`${styles.mainTab} ${activeTab === 'standings' ? styles.activeMainTab : ''}`}
           onClick={() => setActiveTab('standings')}
-        >Standings</button>
+        >পয়েন্ট টেবিল</button>
       </div>
 
       {/* Content Area */}
@@ -172,9 +172,58 @@ export default function WorldCupWidget() {
           </div>
         )}
 
-        {activeTab !== 'matches' && (
-          <div className={styles.placeholderState}>
-            <p>More information coming soon...</p>
+        {activeTab === 'news' && (
+          <div className={styles.newsSection} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            {[
+              { id: 1, title: '২০২৬ বিশ্বকাপে নতুন ফরম্যাটে খেলা হবে, বাড়ছে দলের সংখ্যা', time: '২ ঘণ্টা আগে', source: 'খেলার খবর' },
+              { id: 2, title: 'ব্রাজিল দলে নতুন চমক, তরুণদের সুযোগ', time: '৫ ঘণ্টা আগে', source: 'স্পোর্টস ডাইজেস্ট' },
+              { id: 3, title: 'বিশ্বকাপের ভেন্যুগুলোর প্রস্তুতি প্রায় শেষ পর্যায়ে', time: '১ দিন আগে', source: 'ফুটবল আপডেট' }
+            ].map(news => (
+              <div key={news.id} style={{ padding: '12px', background: 'rgba(255, 255, 255, 0.03)', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                <h4 style={{ margin: '0 0 6px 0', fontSize: '13px', color: '#e2e8f0', lineHeight: '1.4' }}>{news.title}</h4>
+                <div style={{ display: 'flex', gap: '10px', fontSize: '11px', color: '#718096' }}>
+                  <span>{news.source}</span>
+                  <span>•</span>
+                  <span>{news.time}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {activeTab === 'standings' && (
+          <div className={styles.standingsSection}>
+            <div style={{ padding: '12px', background: 'rgba(255, 255, 255, 0.03)', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
+              <h4 style={{ margin: '0 0 10px 0', fontSize: '12px', color: '#a0aec0', textTransform: 'uppercase' }}>গ্রুপ সি (Group C)</h4>
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px', color: '#e2e8f0' }}>
+                <thead>
+                  <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)', color: '#718096', textAlign: 'left' }}>
+                    <th style={{ padding: '6px 4px', fontWeight: '500' }}>#</th>
+                    <th style={{ padding: '6px 4px', fontWeight: '500' }}>দল</th>
+                    <th style={{ padding: '6px 4px', fontWeight: '500', textAlign: 'center' }}>ম্যাচ</th>
+                    <th style={{ padding: '6px 4px', fontWeight: '500', textAlign: 'center' }}>পয়েন্ট</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { pos: '১', team: 'ব্রাজিল', flag: '🇧🇷', played: '০', pts: '০' },
+                    { pos: '২', team: 'মরক্কো', flag: '🇲🇦', played: '০', pts: '০' },
+                    { pos: '৩', team: 'হাইতি', flag: '🇭🇹', played: '০', pts: '০' },
+                    { pos: '৪', team: 'স্কটল্যান্ড', flag: '🏴󠁧󠁢󠁳󠁣󠁴󠁿', played: '০', pts: '০' }
+                  ].map(team => (
+                    <tr key={team.pos} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
+                      <td style={{ padding: '8px 4px' }}>{team.pos}</td>
+                      <td style={{ padding: '8px 4px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <span>{team.flag}</span>
+                        <span style={{ fontWeight: '600' }}>{team.team}</span>
+                      </td>
+                      <td style={{ padding: '8px 4px', textAlign: 'center' }}>{team.played}</td>
+                      <td style={{ padding: '8px 4px', textAlign: 'center', fontWeight: '700' }}>{team.pts}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         )}
       </div>
