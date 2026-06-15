@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>লগইন - মুসলিম বাংলা</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1b5e20;
+            --primary-light: #4caf50;
+            --bg: #f4f7f6;
+            --white: #ffffff;
+            --text: #2e3d33;
+            --gray: #757575;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-card {
+            background: var(--white);
+            width: 100%;
+            max-width: 400px;
+            padding: 40px 30px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .logo-circle {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            color: white;
+            box-shadow: 0 10px 20px rgba(27, 94, 32, 0.2);
+        }
+
+        h2 {
+            font-size: 24px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: var(--gray);
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+            margin-left: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 15px;
+            border: 1px solid #eee;
+            background: #fafafa;
+            margin-top: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: var(--primary-light);
+            background: var(--white);
+            box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.1);
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            border-radius: 15px;
+            border: none;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 8px 20px rgba(27, 94, 32, 0.2);
+            transition: 0.3s;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .loader {
+            margin-top: 15px;
+            font-size: 13px;
+            color: var(--primary);
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            body {
+                max-width: 500px;
+                margin: 0 auto;
+                border-left: 1px solid #ddd;
+                border-right: 1px solid #ddd;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-card">
+        <div class="logo-circle">🌙</div>
+        <h2>স্বাগতম</h2>
+        <p>বিস্তারিত তথ্য দেখতে আপনার মোবাইল নম্বর দিয়ে প্রবেশ করুন</p>
+
+        <div class="input-group">
+            <label>মোবাইল নম্বর</label>
+            <input type="tel" id="phone" placeholder="01XXXXXXXXX">
+        </div>
+
+        <button id="loginBtn" onclick="handleLogin()">এগিয়ে যান</button>
+        <div class="loader" id="loader">প্রসেসিং হচ্ছে...</div>
+    </div>
+
+    <script>
+        async function handleLogin() {
+            const phone = document.getElementById("phone").value.trim();
+            const btn = document.getElementById("loginBtn");
+            const loader = document.getElementById("loader");
+
+            const phoneRegex = /^01[3-9]\d{8}$/;
+
+            if (!phoneRegex.test(phone)) {
+                alert("সঠিক বাংলাদেশি মোবাইল নম্বর দিন");
+                return;
+            }
+
+            btn.disabled = true;
+            loader.style.display = "block";
+
+            try {
+                const checkRes = await fetch("https://infopocket.unexsoft.xyz/check_subscription.php", {
+                    method: "POST",
+                    body: new URLSearchParams({ user_mobile: phone })
+                });
+
+                const checkData = await checkRes.json();
+
+                if (checkData.subscriptionStatus === "REGISTERED") {
+                    localStorage.setItem("phone", phone);
+                    localStorage.setItem("isLoggedIn", "true");
+
+                    const destination = localStorage.getItem("redirect_after_login") || "home.html";
+                    localStorage.removeItem("redirect_after_login");
+                    window.location.href = destination;
+                    return;
+                }
+
+                const res = await fetch("https://unexsoft.xyz/send_otp.php", {
+                    method: "POST",
+                    body: new URLSearchParams({ user_mobile: phone })
+                });
+
+                const data = await res.json();
+
+                if (data.success) {
+                    localStorage.setItem("phone", phone);
+                    localStorage.setItem("ref", data.referenceNo);
+                    window.location.href = "otp.html";
+                } else {
+                    alert(data.message || "OTP পাঠানো সম্ভব হয়নি। পুনরায় চেষ্টা করুন।");
+                }
+
+            } catch (e) {
+                alert("নেটওয়ার্ক সমস্যা");
+            } finally {
+                btn.disabled = false;
+                loader.style.display = "none";
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Hind_Siliguri } from "next/font/google";
 import "./globals.css";
 import { AppProvider } from "../context/AppContext";
+import { AuthProvider } from "../context/AuthContext";
 
 const hindSiliguri = Hind_Siliguri({
   variable: "--font-hind",
@@ -10,7 +11,7 @@ const hindSiliguri = Hind_Siliguri({
 });
 
 export const metadata: Metadata = {
-  title: "কৃষি আবহাওয়া (Agriculture Weather)",
+  title: "ইনফো পকেট (Info Pocket)",
   description: "A premium, dynamic web application for agriculture, live weather, and prayer times.",
 };
 
@@ -22,9 +23,11 @@ export default function RootLayout({
   return (
     <html lang="bn" className={`${hindSiliguri.variable}`} suppressHydrationWarning>
       <body suppressHydrationWarning>
-        <AppProvider>
-          {children}
-        </AppProvider>
+        <AuthProvider>
+          <AppProvider>
+            {children}
+          </AppProvider>
+        </AuthProvider>
       </body>
     </html>
   );

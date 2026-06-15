@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>মুসলিম বাংলা - ইসলামিক পোর্টাল</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1b5e20; /* Deep Green */
+            --primary-light: #4caf50;
+            --accent: #ffd700;
+            --bg: #f4f7f6;
+            --white: #ffffff;
+            --text: #2e3d33;
+            --gray: #757575;
+            --glass: rgba(255, 255, 255, 0.9);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            padding-bottom: 80px; /* Space for bottom nav */
+            overflow-x: hidden;
+        }
+
+        /* Header Area */
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--white);
+            padding: 40px 20px 80px;
+            border-radius: 0 0 30px 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        /* Search Bar */
+        .search-container {
+            max-width: 90%;
+            margin: -30px auto 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .search-bar {
+            background: var(--white);
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-bar input {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        /* Categories Grid */
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--text);
+            transition: transform 0.2s;
+        }
+
+        .cat-item:active {
+            transform: scale(0.9);
+        }
+
+        .cat-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--white);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .cat-item span {
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* Main Content Cards */
+        .section-title {
+            padding: 10px 20px;
+            font-size: 20px;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-title a {
+            font-size: 14px;
+            color: var(--primary-light);
+            text-decoration: none;
+        }
+
+        .card-container {
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .info-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+
+        .info-card .tag {
+            font-size: 12px;
+            color: var(--primary-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .info-card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .info-card p {
+            font-size: 14px;
+            color: var(--gray);
+            line-height: 1.6;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .lock-overlay {
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-light);
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            border-radius: 25px 25px 0 0;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.08);
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            text-decoration: none;
+            color: var(--gray);
+            flex: 1;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+
+        .nav-item i {
+            font-size: 20px;
+        }
+
+        .nav-item span {
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        /* Quick Info Bar */
+        .quick-info {
+            background: #e8f5e9;
+            margin: 20px;
+            padding: 15px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+
+        .q-item h4 {
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        .q-item p {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        @media (min-width: 768px) {
+            body { max-width: 500px; margin: 0 auto; border-left: 1px solid #ddd; border-right: 1px solid #ddd; }
+            .bottom-nav { max-width: 500px; left: 50%; transform: translateX(-50%); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>মুসলিম বাংলা</h1>
+        <p>সহীহ জ্ঞান ও আমলের বিশ্বস্ত পোর্টাল</p>
+    </div>
+
+    <div class="search-container">
+        <div class="search-bar">
+            <span>🔍</span>
+            <input type="text" placeholder="কুরআন, হাদিস বা মাসায়েল খুঁজুন...">
+        </div>
+    </div>
+
+    <div class="quick-info">
+        <div class="q-item">
+            <h4>আজকের তারিখ</h4>
+            <p id="hijriDate">২৯ শাওয়াল</p>
+        </div>
+        <div class="q-item">
+            <h4>পরবর্তী নামাজ</h4>
+            <p>আসর - ০৪:৩০</p>
+        </div>
+    </div>
+
+    <div class="categories">
+        <a href="#" class="cat-item">
+            <div class="cat-icon">📖</div>
+            <span>কুরআন</span>
+        </a>
+        <a href="#" class="cat-item">
+            <div class="cat-icon">📜</div>
+            <span>হাদিস</span>
+        </a>
+        <a href="#" class="cat-item">
+            <div class="cat-icon">⚖️</div>
+            <span>মাসায়েল</span>
+        </a>
+        <a href="#" class="cat-item">
+            <div class="cat-icon">🤲</div>
+            <span>দু'আ</span>
+        </a>
+        <a href="#" class="cat-item">
+            <div class="cat-icon">📰</div>
+            <span>প্রবন্ধ</span>
+        </a>
+        <a href="#" class="cat-item">
+            <div class="cat-icon">🧮</div>
+            <span>যাকাত</span>
+        </a>
+        <a href="#" class="cat-item">
+            <div class="cat-icon">💍</div>
+            <span>বিবাহ</span>
+        </a>
+        <a href="#" class="cat-item">
+            <div class="cat-icon">❓</div>
+            <span>জিজ্ঞাসা</span>
+        </a>
+    </div>
+
+    <div class="section-title">
+        <span>নির্বাচিত প্রবন্ধ</span>
+        <a href="#">সবগুলো দেখুন</a>
+    </div>
+
+    <div class="card-container">
+        <!-- Card 1 -->
+        <div class="info-card" onclick="checkAccess('quran-importance')">
+            <span class="tag">কুরআন</span>
+            <h3>দৈনন্দিন জীবনে কুরআন তেলাওয়াতের গুরুত্ব ও ফজিলত</h3>
+            <p>কুরআন তেলাওয়াত মুমিনের হৃদয়ে প্রশান্তি আনে। রাসূলুল্লাহ (সা.) বলেছেন, তোমরা কুরআন পাঠ করো...</p>
+            <div class="lock-overlay">
+                বিস্তারিত পড়ুন 🔒
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="info-card" onclick="checkAccess('ramadan-tips')">
+            <span class="tag">রোজা</span>
+            <h3>শাওয়ালের ছয় রোজা: কেন এবং কীভাবে রাখবেন?</h3>
+            <p>রমজানের পর শাওয়ালের ছয় রোজা রাখার মাধ্যমে পুরো বছর রোজা রাখার সওয়াব পাওয়া যায়...</p>
+            <div class="lock-overlay">
+                বিস্তারিত পড়ুন 🔒
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="info-card" onclick="checkAccess('daily-dua')">
+            <span class="tag">দু'আ</span>
+            <h3>সকাল-সন্ধ্যার মাসনুন জিকির ও দুআসমূহ</h3>
+            <p>দিনের শুরুতে এবং শেষে আল্লাহর স্মরণ বান্দাকে শয়তানের কুমন্ত্রণা থেকে রক্ষা করে...</p>
+            <div class="lock-overlay">
+                বিস্তারিত পড়ুন 🔒
+            </div>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item active">
+            <i>🏠</i>
+            <span>হোম</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i>📖</i>
+            <span>কুরআন</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i>📜</i>
+            <span>হাদিস</span>
+        </a>
+        <a href="login.html" class="nav-item" id="navProfile">
+            <i>👤</i>
+            <span>প্রোফাইল</span>
+        </a>
+    </nav>
+
+    <script>
+        function checkAccess(contentId) {
+            const isLoggedIn = localStorage.getItem("isLoggedIn");
+            if (isLoggedIn) {
+                window.location.href = `details.html?id=${contentId}`;
+            } else {
+                localStorage.setItem("redirect_after_login", `details.html?id=${contentId}`);
+                window.location.href = "login.html";
+            }
+        }
+
+        // Update profile icon if logged in
+        window.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem("isLoggedIn")) {
+                const navProfile = document.getElementById('navProfile');
+                navProfile.href = 'home.html';
+                navProfile.querySelector('span').textContent = 'অ্যাকাউন্ট';
+            }
+        });
+    </script>
+</body>
+</html>

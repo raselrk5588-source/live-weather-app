@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>বিস্তারিত - মুসলিম বাংলা</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1b5e20;
+            --primary-light: #4caf50;
+            --bg: #f4f7f6;
+            --white: #ffffff;
+            --text: #2e3d33;
+            --gray: #757575;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+        }
+
+        .top-bar {
+            background: var(--white);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: var(--text);
+            font-size: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .article-card {
+            background: var(--white);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .tag {
+            background: #e8f5e9;
+            color: var(--primary);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            line-height: 1.4;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .meta {
+            display: flex;
+            gap: 15px;
+            font-size: 13px;
+            color: var(--gray);
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        .content {
+            font-size: 17px;
+            color: #444;
+        }
+
+        .content p {
+            margin-bottom: 20px;
+        }
+
+        .content blockquote {
+            background: #f9f9f9;
+            border-left: 5px solid var(--primary-light);
+            padding: 15px;
+            margin-bottom: 20px;
+            font-style: italic;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .premium-notice {
+            background: #fff8e1;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #f57f17;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @media (min-width: 768px) {
+            body { max-width: 500px; margin: 0 auto; border-left: 1px solid #ddd; border-right: 1px solid #ddd; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <a href="index.html" class="back-btn">⬅️</a>
+        <span style="font-weight: 600;">বিস্তারিত প্রবন্ধ</span>
+    </div>
+
+    <div class="container">
+        <div class="article-card" id="articleBody">
+            <p>লোড হচ্ছে...</p>
+        </div>
+    </div>
+
+    <script>
+        if (!localStorage.getItem("isLoggedIn")) {
+            window.location.href = "login.html";
+        }
+
+        const articles = {
+            'quran-importance': {
+                tag: 'কুরআন',
+                title: 'দৈনন্দিন জীবনে কুরআন তেলাওয়াতের গুরুত্ব ও ফজিলত',
+                date: '২৯ এপ্রিল, ২০২৬',
+                content: `
+                    <p>কুরআন মাজীদ আল্লাহর কালাম। এটি মানবজাতির হেদায়েতের জন্য নাজিল করা হয়েছে। দৈনন্দিন জীবনে কুরআন তেলাওয়াতের ফজিলত অপরিসীম।</p>
+                    <blockquote>"যে ব্যক্তি আল্লাহর কিতাব থেকে একটি অক্ষর পাঠ করবে, তার জন্য একটি নেকি রয়েছে। আর একটি নেকি দশটি নেকির সমান হয়।" (তিরমিজি)</blockquote>
+                    <p>কুরআন তেলাওয়াত করলে অন্তরে প্রশান্তি আসে এবং ঈমান বৃদ্ধি পায়। বিশেষ করে ফজরের নামাজের পর কুরআন তেলাওয়াত করা অত্যন্ত বরকতময়। এটি আমাদের আখিরাতের জন্য সঞ্চয় এবং কবরের সঙ্গী হবে।</p>
+                    <p>তাই আমাদের উচিত প্রতিদিন অন্তত কিছুটা সময় হলেও কুরআন তেলাওয়াতের জন্য ব্যয় করা এবং এর অর্থ বোঝার চেষ্টা করা।</p>
+                `
+            },
+            'ramadan-tips': {
+                tag: 'রোজা',
+                title: 'শাওয়ালের ছয় রোজা: কেন এবং কীভাবে রাখবেন?',
+                date: '২৮ এপ্রিল, ২০২৬',
+                content: `
+                    <p>শাওয়াল মাসের ছয়টি রোজা রাখা সুন্নতে মুয়াক্কাদা। রমজানের ফরজ রোজার পর এই ছয়টি রোজা রাখার বিশেষ মর্যাদা রয়েছে।</p>
+                    <blockquote>রাসূলুল্লাহ (সা.) বলেছেন, "যে ব্যক্তি রমজানের রোজা রাখল এবং এরপর শওয়াল মাসে ছয়টি রোজা রাখল, সে যেন সারা বছরই রোজা রাখল।" (সহীহ মুসলিম)</blockquote>
+                    <p>এই রোজাগুলো শাওয়াল মাসের শুরু থেকে শেষ পর্যন্ত যেকোনো সময় রাখা যায়। একনাগাড়ে রাখাও যায় আবার বিরতি দিয়েও রাখা যায়। যারা রমজানের ফরজ রোজা পূর্ণ করেছেন, তাদের জন্য এই সুবর্ণ সুযোগ হাতছাড়া করা উচিত নয়।</p>
+                `
+            },
+            'daily-dua': {
+                tag: 'দু\'আ',
+                title: 'সকাল-সন্ধ্যার মাসনুন জিকির ও দুআসমূহ',
+                date: '২৭ এপ্রিল, ২০২৬',
+                content: `
+                    <p>সকাল এবং সন্ধ্যায় আল্লাহর জিকির করা মুমিনের জন্য একটি শক্তিশালী ঢাল। এটি শয়তানের কুমন্ত্রণা এবং বিভিন্ন বিপদ-আপদ থেকে রক্ষা করে।</p>
+                    <p>আয়াতুল কুরসি, সূরা ইখলাস, সূরা ফালাক এবং সূরা নাস তিনবার করে পাঠ করা সকাল-সন্ধ্যার আমলের অন্তর্ভুক্ত। এছাড়া "বিসমিল্লাহিল্লাজি লা ইয়াদুররু..." দোয়াটি পাঠ করলে কোনো কিছুই ক্ষতি করতে পারবে না ইনশাআল্লাহ।</p>
+                    <p>নিয়মিত এই আমলগুলো করার মাধ্যমে আমরা আল্লাহর সান্নিধ্য লাভ করতে পারি এবং আত্মিক শান্তি পেতে পারি।</p>
+                `
+            }
+        };
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const articleId = urlParams.get('id');
+        const article = articles[articleId];
+
+        if (article) {
+            document.getElementById('articleBody').innerHTML = `
+                <div class="premium-notice">✨ আপনি এই এক্সক্লুসিভ কন্টেন্টটি আনলক করেছেন</div>
+                <span class="tag">${article.tag}</span>
+                <h1>${article.title}</h1>
+                <div class="meta">
+                    <span>📅 ${article.date}</span>
+                    <span>📖 ৫ মিনিট পাঠ</span>
+                </div>
+                <div class="content">
+                    ${article.content}
+                </div>
+            `;
+        } else {
+            document.getElementById('articleBody').innerHTML = `<h1>আর্টিকেল পাওয়া যায়নি</h1>`;
+        }
+    </script>
+</body>
+</html>

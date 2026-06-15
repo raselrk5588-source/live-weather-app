@@ -1,95 +1,42 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './WorldCupWidget.module.css';
 
 // Using Google-like tabs
 type Tab = 'matches' | 'news' | 'standings';
 
-// Dates
-const dates = [
-  { id: '13_jun', label: 'গতকাল, ১৩ জুন' },
-  { id: '14_jun', label: 'আজ, ১৪ জুন' },
-  { id: '15_jun', label: 'আগামীকাল, ১৫ জুন' },
-];
-
 export default function WorldCupWidget() {
   const [activeTab, setActiveTab] = useState<Tab>('matches');
-  const [activeDate, setActiveDate] = useState('14_jun');
+  const [activeDate, setActiveDate] = useState('');
+  const [dates, setDates] = useState<{id: string, label: string}[]>([]);
+  const [matchesByDate, setMatchesByDate] = useState<Record<string, any[]>>({});
+  const [standings, setStandings] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Google-like match data structure based on BST
-  const matchesByDate: Record<string, any[]> = {
-    '13_jun': [
-      {
-        id: 'r1',
-        group: 'গ্রুপ বি',
-        status: 'FT',
-        isLive: false,
-        teamA: { name: 'কাতার', flag: '🇶🇦', score: 1 },
-        teamB: { name: 'সুইজারল্যান্ড', flag: '🇨🇭', score: 2 }
-      },
-      {
-        id: 'r3',
-        group: 'গ্রুপ ডি',
-        status: 'FT',
-        isLive: false,
-        teamA: { name: 'অস্ট্রেলিয়া', flag: '🇦🇺', score: 1 },
-        teamB: { name: 'তুরস্ক', flag: '🇹🇷', score: 1 }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch('/api/sports/worldcup');
+        const data = await res.json();
+        setMatchesByDate(data.matchesByDate);
+        setStandings(data.standings);
+        setDates(data.tabs);
+        if (!activeDate && data.tabs.length > 0) {
+          setActiveDate(data.tabs[1].id); // Default to 'Today'
+        }
+        setIsLoading(false);
+      } catch (err) {
+        console.error('Failed to fetch sports data', err);
+        setIsLoading(false);
       }
-    ],
-    '14_jun': [
-      {
-        id: 'u1',
-        group: 'গ্রুপ বি',
-        status: '01:00 AM',
-        isLive: false,
-        teamA: { name: 'কাতার', flag: '🇶🇦', score: null },
-        teamB: { name: 'সুইজারল্যান্ড', flag: '🇨🇭', score: null }
-      },
-      {
-        id: 'u2',
-        group: 'গ্রুপ সি',
-        status: '04:00 AM',
-        isLive: false,
-        teamA: { name: 'ব্রাজিল', flag: '🇧🇷', score: null },
-        teamB: { name: 'মরক্কো', flag: '🇲🇦', score: null }
-      },
-      {
-        id: 'u3',
-        group: 'গ্রুপ সি',
-        status: '07:00 AM',
-        isLive: false,
-        teamA: { name: 'হাইতি', flag: '🇭🇹', score: null },
-        teamB: { name: 'স্কটল্যান্ড', flag: '🏴󠁧󠁢󠁳󠁣󠁴󠁿', score: null }
-      },
-      {
-        id: 'u4',
-        group: 'গ্রুপ ডি',
-        status: '10:00 AM',
-        isLive: false,
-        teamA: { name: 'অস্ট্রেলিয়া', flag: '🇦🇺', score: null },
-        teamB: { name: 'তুরস্ক', flag: '🇹🇷', score: null }
-      }
-    ],
-    '15_jun': [
-      {
-        id: 'u5',
-        group: 'গ্রুপ এফ',
-        status: '02:00 AM',
-        isLive: false,
-        teamA: { name: 'নেদারল্যান্ডস', flag: '🇳🇱', score: null },
-        teamB: { name: 'জাপান', flag: '🇯🇵', score: null }
-      },
-      {
-        id: 'u6',
-        group: 'গ্রুপ ই',
-        status: '05:00 AM',
-        isLive: false,
-        teamA: { name: 'আইভরি কোস্ট', flag: '🇨🇮', score: null },
-        teamB: { name: 'ইকুয়েডর', flag: '🇪🇨', score: null }
-      }
-    ]
-  };
+    };
+    
+    fetchData(); // Initial fetch
+    const interval = setInterval(fetchData, 30000); // Auto-update every 30s
+    
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className={styles.widgetContainer}>
@@ -139,7 +86,11 @@ export default function WorldCupWidget() {
 
             {/* Match List */}
             <div className={styles.matchList}>
-              {(matchesByDate[activeDate] || []).map((match) => (
+              {isLoading ? (
+                <div className={styles.placeholderState}>ম্যাচের তথ্য লোড হচ্ছে...</div>
+              ) : (!matchesByDate[activeDate] || matchesByDate[activeDate].length === 0) ? (
+                <div className={styles.placeholderState} style={{ padding: '20px', textAlign: 'center', color: '#718096' }}>এই দিনে কোনো ম্যাচ নেই</div>
+              ) : matchesByDate[activeDate].map((match) => (
                 <div key={match.id} className={styles.googleMatchCard}>
                   <div className={styles.matchGroupInfo}>{match.group}</div>
                   
@@ -163,7 +114,8 @@ export default function WorldCupWidget() {
                     </div>
                     
                     <div className={styles.matchStatusSection}>
-                      <span className={styles.statusText}>{match.status}</span>
+                      {match.isLive && <span className={styles.liveIndicator}>LIVE</span>}
+                      <span className={match.isLive ? styles.liveStatusText : styles.statusText}>{match.status}</span>
                     </div>
                   </div>
                 </div>
@@ -205,12 +157,9 @@ export default function WorldCupWidget() {
                   </tr>
                 </thead>
                 <tbody>
-                  {[
-                    { pos: '১', team: 'ব্রাজিল', flag: '🇧🇷', played: '০', pts: '০' },
-                    { pos: '২', team: 'মরক্কো', flag: '🇲🇦', played: '০', pts: '০' },
-                    { pos: '৩', team: 'হাইতি', flag: '🇭🇹', played: '০', pts: '০' },
-                    { pos: '৪', team: 'স্কটল্যান্ড', flag: '🏴󠁧󠁢󠁳󠁣󠁴󠁿', played: '০', pts: '০' }
-                  ].map(team => (
+                  {isLoading ? (
+                    <tr><td colSpan={4} style={{ textAlign: 'center', padding: '20px', color: '#718096' }}>লোড হচ্ছে...</td></tr>
+                  ) : standings.map((team, idx) => (
                     <tr key={team.pos} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
                       <td style={{ padding: '8px 4px' }}>{team.pos}</td>
                       <td style={{ padding: '8px 4px', display: 'flex', alignItems: 'center', gap: '6px' }}>

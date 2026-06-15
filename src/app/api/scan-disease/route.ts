@@ -7,10 +7,17 @@ export async function POST(req: NextRequest) {
   try {
     const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
-      return NextResponse.json(
-        { error: "API key is missing. Please add GEMINI_API_KEY to your .env.local file." },
-        { status: 500 }
-      );
+      // Return simulated mock response if API key is not configured
+      return NextResponse.json({
+        diseaseName: "ধানের ব্লাস্ট বা পাতাপোড়া রোগ (Demo Result)",
+        accuracy: "৮৫% নিশ্চয়তা (API Key Missing)",
+        description: "এটি একটি ডেমো রেজাল্ট। আসল AI বিশ্লেষণ পেতে .env.local ফাইলে আপনার GEMINI_API_KEY যুক্ত করুন।",
+        remedies: [
+          "আক্রান্ত পাতা বা ডাল দ্রুত কেটে ফেলে দিন।",
+          "প্রতি লিটার পানিতে ২ গ্রাম পরিমাপে ম্যানকোজেব (Mancozeb) মিশিয়ে স্প্রে করুন।",
+          "আসল ফলাফল পেতে আপনার Gemini API Key কনফিগার করুন।"
+        ]
+      });
     }
 
     const formData = await req.formData();

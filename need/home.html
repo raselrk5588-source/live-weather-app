@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>প্রোফাইল - মুসলিম বাংলা</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1b5e20;
+            --primary-light: #4caf50;
+            --bg: #f4f7f6;
+            --white: #ffffff;
+            --text: #2e3d33;
+            --gray: #757575;
+            --red: #d32f2f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            padding-bottom: 80px;
+        }
+
+        .profile-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--white);
+            padding: 50px 20px;
+            text-align: center;
+            border-radius: 0 0 40px 40px;
+        }
+
+        .avatar {
+            width: 90px;
+            height: 90px;
+            background: rgba(255,255,255,0.2);
+            border: 3px solid var(--white);
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+
+        .profile-header h2 {
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+
+        .profile-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .container {
+            padding: 25px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .status-card {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            margin-top: -30px;
+            margin-bottom: 25px;
+        }
+
+        .status-info h4 {
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+        .status-info p {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .badge {
+            background: #e8f5e9;
+            color: var(--primary);
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .menu-list {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 18px 20px;
+            text-decoration: none;
+            color: var(--text);
+            border-bottom: 1px solid #f5f5f5;
+            gap: 15px;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .menu-item i {
+            width: 35px;
+            height: 35px;
+            background: #f0f4f1;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .menu-item span {
+            font-weight: 500;
+            flex: 1;
+        }
+
+        .logout-btn {
+            margin-top: 30px;
+            width: 100%;
+            padding: 15px;
+            border-radius: 15px;
+            border: 1px solid #ffcdd2;
+            background: #fff;
+            color: var(--red);
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .logout-btn:active {
+            background: #ffebee;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            border-radius: 25px 25px 0 0;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.08);
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            text-decoration: none;
+            color: var(--gray);
+            flex: 1;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+
+        @media (min-width: 768px) {
+            body { max-width: 500px; margin: 0 auto; border-left: 1px solid #ddd; border-right: 1px solid #ddd; }
+            .bottom-nav { max-width: 500px; left: 50%; transform: translateX(-50%); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="profile-header">
+        <div class="avatar">👤</div>
+        <h2 id="userPhone">01XXXXXXXXX</h2>
+        <p>সম্মানিত সদস্য - মুসলিম বাংলা</p>
+    </div>
+
+    <div class="container">
+        <div class="status-card">
+            <div class="status-info">
+                <h4>সাবস্ক্রিপশন স্ট্যাটাস</h4>
+                <p>অ্যাক্টিভ</p>
+            </div>
+            <div class="badge">PREMIUM</div>
+        </div>
+
+        <div class="menu-list">
+            <a href="index.html" class="menu-item">
+                <i>🏠</i>
+                <span>মূল পাতা (হোম)</span>
+                <span>➡️</span>
+            </a>
+            <a href="#" class="menu-item">
+                <i>📖</i>
+                <span>আমার পড়া আর্টিকেলসমূহ</span>
+                <span>➡️</span>
+            </a>
+            <a href="#" class="menu-item">
+                <i>⚙️</i>
+                <span>সেটিংস</span>
+                <span>➡️</span>
+            </a>
+            <a href="javascript:void(0)" onclick="unsubscribe()" class="menu-item" style="color: var(--red);">
+                <i>❌</i>
+                <span>সাবস্ক্রিপশন বাতিল করুন</span>
+                <span>➡️</span>
+            </a>
+        </div>
+
+        <button class="logout-btn" onclick="logout()">লগ আউট</button>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i>🏠</i>
+            <span>হোম</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i>📖</i>
+            <span>কুরআন</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i>📜</i>
+            <span>হাদিস</span>
+        </a>
+        <a href="home.html" class="nav-item active">
+            <i>👤</i>
+            <span>প্রোফাইল</span>
+        </a>
+    </nav>
+
+    <script>
+        const phone = localStorage.getItem("phone");
+        if (phone) {
+            document.getElementById("userPhone").textContent = phone;
+        }
+
+        if (!localStorage.getItem("isLoggedIn")) {
+            window.location.href = "login.html";
+        }
+
+        function logout() {
+            localStorage.clear();
+            window.location.href = "login.html";
+        }
+
+        async function unsubscribe() {
+            const phone = localStorage.getItem("phone");
+
+            if (!confirm("আপনি কি নিশ্চিতভাবে সাবস্ক্রিপশন বাতিল করতে চান?")) return;
+
+            try {
+                await fetch("https://infopocket.unexsoft.xyz/unsubscribe.php", {
+                    method: "POST",
+                    body: new URLSearchParams({ user_mobile: phone })
+                });
+
+                localStorage.clear();
+                window.location.href = "login.html";
+            } catch (e) {
+                alert("নেটওয়ার্ক সমস্যা");
+            }
+        }
+    </script>
+</body>
+</html>
