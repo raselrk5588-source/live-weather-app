@@ -101,7 +101,7 @@ export default function WorldCupWidget() {
                           <span className={styles.flag}>{match.teamA.flag}</span>
                           <span className={styles.teamName}>{match.teamA.name}</span>
                         </div>
-                        {match.teamA.score !== null && <span className={styles.teamScore}>{match.teamA.score}</span>}
+                        {match.teamA.score !== null ? <span className={styles.teamScore}>{match.teamA.score}</span> : <span className={styles.teamScore}>-</span>}
                       </div>
                       
                       <div className={styles.teamRow}>
@@ -109,7 +109,7 @@ export default function WorldCupWidget() {
                           <span className={styles.flag}>{match.teamB.flag}</span>
                           <span className={styles.teamName}>{match.teamB.name}</span>
                         </div>
-                        {match.teamB.score !== null && <span className={styles.teamScore}>{match.teamB.score}</span>}
+                        {match.teamB.score !== null ? <span className={styles.teamScore}>{match.teamB.score}</span> : <span className={styles.teamScore}>-</span>}
                       </div>
                     </div>
                     
