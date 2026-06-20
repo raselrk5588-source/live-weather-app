@@ -2,6 +2,11 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 <img width="713" height="382" alt="image" src="https://github.com/user-attachments/assets/05605796-4eaf-4d83-95d7-645dcd4dd923" />
 goto cpanal search php version select 
 
+<img width="754" height="283" alt="image" src="https://github.com/user-attachments/assets/5e6ae6be-ac88-428f-8d9a-8c5714a8156c" />
+
+unzip full project in public_HTML then go public folder copy url and create domain
+
+
 
 ## Getting Started
 
